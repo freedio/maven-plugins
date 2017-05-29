@@ -2,7 +2,6 @@ package com.coradec.maven;
 
 import static java.util.stream.Collectors.*;
 
-import com.coradec.coracore.annotation.Component;
 import com.coradec.coracore.annotation.Implementation;
 import com.coradec.coracore.annotation.Inject;
 import com.coradec.coracore.annotation.Nullable;
@@ -244,6 +243,8 @@ public class Carchiver extends AbstractMojo {
                     copy(in, out);
                 }
             }
+        } finally {
+            Files.delete(from);
         }
     }
 
@@ -760,7 +761,7 @@ public class Carchiver extends AbstractMojo {
         @Override
         public AnnotationVisitor visitAnnotation(final String desc, final boolean visible) {
             final String annClassName = ClassUtil.toExternal(desc);
-            if (annClassName.equals(Component.class.getName())) {
+            if (annClassName.equals(Inject.class.getName())) {
                 components.add(currentClassName);
             } else if (annClassName.equals(Implementation.class.getName())) {
                 implementations.add(currentClassName); // default
