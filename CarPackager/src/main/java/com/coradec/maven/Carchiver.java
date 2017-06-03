@@ -77,7 +77,7 @@ public class Carchiver extends AbstractMojo {
     private static final Name NAME_ARCHIVER = new Name("Archiver-Version");
 
     /** The class signature of the @Inject annotation. */
-    private static final String INJECT_DESC = ClassUtil.signatureOf(Inject.class);
+    private static final String INJECT_DESC = ClassUtil.descriptorOf(Inject.class);
 
     /** The current Maven session. */
     @Parameter(defaultValue = "${session}", readonly = true, required = true)
