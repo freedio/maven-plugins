@@ -152,9 +152,13 @@ public class Carchiver extends AbstractMojo {
      * Executes the mojo which creates the comprehensive archive.
      */
     @Override public void execute() throws MojoExecutionException, MojoFailureException {
+        final Log log = getLog();
+        if (!classesDirectory.isDirectory()) {
+            log.info("Classes directory not present -> skipping");
+            return;
+        }
         if (remoteRepositories != null) repos.addAll(remoteRepositories);
         repos.add(0, localRepository);
-        final Log log = getLog();
         outputJar = outputFile + ".jar";
         try {
             if (isExecutable()) {
